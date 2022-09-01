@@ -13,22 +13,21 @@ function App() {
     e.preventDefault();
 
       try {
-        let res = await fetch("https://httpbin.org/post", {
+        if(validator.isEmail(email) && (email.endsWith('@gmail.com') || email.endsWith('@yahoo.com') || email.endsWith('@hotmail.com') || email.endsWith('@protonmail.com'))) {
+          let res = await fetch("https://httpbin.org/post", {
           method: "POST",
           body: JSON.stringify({
             email: email,
           }),
         });
 
-        if(validator.isEmail(email) && (email.endsWith('@gmail.com') || email.endsWith('@yahoo.com') || email.endsWith('@hotmail.com') || email.endsWith('@protonmail.com'))) {
+        if (res.status !== 200) {
+          setMessage("Some error occured");
+        }
+
           setMessage("Subscribed Successfully")
         } else {
           setMessage("Invalid Email")
-        }
-  
-  
-        if (res.status !== 200) {
-          setMessage("Some error occured");
         }
 
       } catch (err) {
