@@ -20,10 +20,10 @@ function App() {
           }),
         });
 
-        if(!validator.isEmail(email)) {
-          setMessage("Invalid Email")
-        } else {
+        if(validator.isEmail(email) && (email.endsWith('@gmail.com') || email.endsWith('@yahoo.com') || email.endsWith('@hotmail.com') || email.endsWith('@protonmail.com'))) {
           setMessage("Subscribed Successfully")
+        } else {
+          setMessage("Invalid Email")
         }
   
   
@@ -56,7 +56,7 @@ function App() {
               <input
                 className="newsl__input"
                 value={email}
-                type="email"
+                type="text"
                 onChange={(e) => setEmail(e.target.value)}
                 name=""
                 id=""
